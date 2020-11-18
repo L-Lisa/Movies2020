@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useParams } from 'react-router-dom';
+import { DetailsCard } from 'components/DetailsCard'
 
 export const Details = () => {
     const { id } = useParams()
@@ -12,12 +13,16 @@ export const Details = () => {
         fetch(detailsURL)
             .then(res => res.json())
             .then((json) => {
+                console.log(json._embedded.show)
+                console.log(json._embedded.show)
                 setDetails(json)
-
             })
 
     }, [detailsURL, id])
     console.log(details)
+    console.log(details)
+    /*   console.log(details._embedded) */
+    /* console.log(details._embedded.show.image.medium) */
     /* const Newsummary = () => {
         if (details.summary === null) {
             return
@@ -31,14 +36,7 @@ export const Details = () => {
     } else {
         return (
             <div>
-                details
-        Name: {details.name}
-First Aired: {details.airdate}
-
-                {details.summary ? <p>{details.summary.replace('<p>', '').replace('</p>', '')}  </p> : ''}
-
-
-
+                <DetailsCard {...details} />
             </div>
         )
     }

@@ -1,23 +1,35 @@
 import React, { useEffect, useState } from 'react'
+import styled from "styled-components/macro"
 import { EpisodeCard } from "components/EpisodeCard"
 import { SearchBar } from "components/SearchBar"
-import { standInImg } from "../standInImg.jpg"
 import { NotFound } from "components/NotFound"
-
+import { Background } from "components/Background"
+import BackImg from "../images/TvBackground.jpg"
+import Logo from "../images/Logo.png"
 
 export const Home = () => {
     const [BaseQuery, setBaseQuery] = useState("")
     const [name, setName] = useState("")
     const [searchRes, setSearchRes] = useState("")
     const [xImage, setXImage] = useState("")
+    const [showBackground, setShowBackground] = useState(true)
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const MainURL = `https://api.tvmaze.com/singlesearch/shows/?q=${BaseQuery}&embed=episodes`
+        setShowBackground(false)
+        setSearchRes("")
 
+        const MainURL = `https://api.tvmaze.com/singlesearch/shows/?q=${BaseQuery}&embed=episodes`
+        /* const backupURL = `http://api.tvmaze.com/search/shows?q=house` */
 
         fetch(MainURL)
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) {
+                    throw 'Could not fetch';
+                }
+                return res.json();
+            })
             .then((json) => {
                 console.log(json)
                 setName(json.name)
@@ -27,71 +39,83 @@ export const Home = () => {
                 setSearchRes(json._embedded)
                 console.log(searchRes)
                 console.log(json._embedded.episodes[0])
-
                 console.log(json._embedded.episodes[0].name)
                 console.log(json._embedded.episodes[0].id)
             })
-        if (!searchRes) {
-            return <>Not Found</>
-        }
     }
-
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <input type="text" value={BaseQuery} onChange={(e) => setBaseQuery(e.target.value)} />
-                <button type="submit">SUBMIT</button>
-            </form>
-
+            <TopSection>
+                <Head>
+                    <img src={Logo} ></img>
+                </Head>
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="search bar"> <Hide className="hidden">Search Bar</Hide></label>
+                    <input type="text" id="searchbar" name="search bar" required placeholder="Name your series" value={BaseQuery} onChange={(e) => setBaseQuery(e.target.value)} />
+                    <button type="submit">SUBMIT</button>
+                </form>
+            </TopSection>
             <div>
-                {searchRes && searchRes.episodes.map((episode) =>
-                    <>
+                {showBackground === true ? <Background /> : (!searchRes ? < NotFound /> : "")}
+                <ListWrapper>
+                    {searchRes && searchRes.episodes.map((episode) =>
+
                         <EpisodeCard key={episode.id} {...episode} />
-                    </>
-                )}
+
+                    )}
+                </ListWrapper>
             </div>
         </>
     )
 }
 
-/* export const Home = () => {
-    const [BaseQuery, setBaseQuery] = useState("friends")
-    const [searchRes, setSearchRes] = useState("")
-    const [name, setName] = useState("")
+const Head = styled.section`
+margin:1em;
+background:#0c2446;
+@media (min-width: 688px) {
+margin: 1em;
+background: #0c2446;
+width: 25%;
+  }
+`;
 
-    const BaseURL = `https://api.tvmaze.com/singlesearch/shows/?q=${BaseQuery}&embed=episodes`
+const ListWrapper = styled.section`
+ width: 100%;
+ background: #0c2446;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+`;
+const TopSection = styled.section`
+    width: 100%;
+    background: #0c2446;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    @media (min-width: 688px) {
+    flex-direction:row;
+  }
+form{
+    width: fit-content;
+    background: whitesmoke;
+    height: 40px;
+    display: flex;
+    align-items: stretch;
+    margin: 0 auto;
+} 
+`;
+const Hide = styled.span`
+position:absolute;
+left:-10000px;
+top:auto;
+width:1px;
+height:1px;
+overflow:hidden;
+`;
 
-    useEffect(() => {
-        fetch(BaseURL)
-            .then(res => res.json())
-            .then(json => setSearchRes(json._embedded))
-    }, [BaseQuery])
-    if (!searchRes) {
-        return <>Paitence, still loading.. </>
-    } */
-
-/*   const updateInput = async (input) => {
-      const filtered = searchRes.filter(userQuery => {
-          return userQuery.toLowerCase().includes(input.toLowerCase())
-      })
-      setInput(input)
-      setUserQuery(filtered)
-  } */
-/*   console.log(searchRes)
-  console.log(searchRes.episodes)
-  console.log(searchRes.episodes[0].name)
-
-  return (
-      <div> */
-/*  <SearchBar /> */
-/*  <img src={searchRes.episodes[0].image.medium} ></img>
-
- {searchRes.episodes.map((episode) =>
-     <EpisodeCard key={episode.id} {...episode} /> */
-
-
-/*  <span key={episode.id}>{episode.number} <img src={episode.image.medium} ></img></span> */
-/*  </div>
-)
-} */
+const Err = styled.section`
+background: green;
+`;
