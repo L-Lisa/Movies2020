@@ -5,11 +5,11 @@ import BackImg from "../images/TvBackground.jpg"
 
 
 
-export const DetailsCard = ({ image, _embedded, name, airdate, premiered, summary }) => {
+export const DetailsCard = ({ id, image, _embedded, name, airdate, premiered, summary }) => {
   return (
     <DetailsWrapper>
       <DetailsDiv>
-        {image ? <img src={image.medium} alt={name}></img> : <img src={StandInImg} alt="MoveE"></img>}
+        {image ? <img src={image.medium} alt={name}></img> : <img src={StandInImg} alt={id}></img>}
         <div>
           {name && <H1>{name} </H1>}
           {airdate && <p> First Aired: {airdate}</p>}
