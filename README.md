@@ -1,11 +1,10 @@
-# React.js template
+# React.js Project
 
-This template has been generated using `create-react-app`, then cleaned up a little.
-
-Add components in the `src` folder and use them in `src/app.js` to get started.
+This is a simple movie search site, enter the name of your favourite series.
 
 ## Features
-* Styled components
-* React router
-* React hooks
-* Eslint
+
+- Styled components
+- React router
+- React hooks
+- Eslint

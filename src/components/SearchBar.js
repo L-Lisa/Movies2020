@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import styled from "styled-components/macro"
 
+const SearchWrapper = styled.div`
+width: 200px;
+height: 60px;
+`;
 
 export const SearchBar = () => {
     const [userQuery, setUserQuery] = useState("")
-
     const UpdateSearch = (e) => {
         const [searchRes, setSearchRes] = useState("")
         const SearchURL = `https://api.tvmaze.com/singlesearch/shows/?q=${userQuery}&embed=episodes`
-
         e.preventDefault()
         fetch(SearchURL)
             .then(res => res.json())
@@ -19,7 +21,6 @@ export const SearchBar = () => {
         }
         console.log(searchRes)
     }
-
     return (
         <SearchWrapper>
             <form onSubmit={UpdateSearch}>
@@ -30,13 +31,7 @@ export const SearchBar = () => {
                 />
                 <button type="submit">SUBMIT</button>
             </form>
-
         </SearchWrapper>
     )
 }
 
-const SearchWrapper = styled.div`
-width: 200px;
-height: 50px;
-background: papayawhip;
-`;

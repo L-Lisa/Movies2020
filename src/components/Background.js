@@ -29,12 +29,11 @@ export const Background = () => {
     }
     return (
         <BackgroundDiv>
-            { BackgroundDetails.map((episode) =>
-
-                <div> {episode.show.name}</div>
-
-
-            )}
+            <div>
+                <h1>
+                    This is a simple search page for your favourite series. Made with React, hooks, router and styled components.
+                  </h1>
+            </div>
         </BackgroundDiv>
     )
 }
@@ -50,6 +49,12 @@ display: flex;
 align-items: center;
 justify-content: center;
 div{
-    background:white
+    background:white;
+    width:80%;
+    padding:4px;
+    h1{
+        font-size:1rem;
+        text-align:center;
+    }
 }
 `;

@@ -4,7 +4,6 @@ import { DetailsCard } from 'components/DetailsCard'
 
 export const Details = () => {
     const { id } = useParams()
-
     const detailsURL = `http://api.tvmaze.com/episodes/${id}?embed=show`
     const [details, setDetails] = useState()
     const [summary, setSummary] = useState()
@@ -17,19 +16,9 @@ export const Details = () => {
                 console.log(json._embedded.show)
                 setDetails(json)
             })
-
     }, [detailsURL, id])
     console.log(details)
     console.log(details)
-    /*   console.log(details._embedded) */
-    /* console.log(details._embedded.show.image.medium) */
-    /* const Newsummary = () => {
-        if (details.summary === null) {
-            return
-        } else {
-            <p>{details.summary.replace('<p>', '').replace('</p>', '')}</p>
-        }
-    } */
 
     if (!details) {
         return <>Loading, please wait</>;

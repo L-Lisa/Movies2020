@@ -1,18 +1,7 @@
 import React from 'react'
 import styled from "styled-components/macro"
 import NotFoundImg from "../images/TestImg.png"
-
-export const NotFound = () => {
-
-    return (
-        <NotFoundBox>
-            <ErrorMessage>
-                Sorry, we couldnt find that!
-            </ErrorMessage>
-        </NotFoundBox>
-    )
-}
-
+import Searching from "../images/searching.gif"
 
 const NotFoundBox = styled.main`
 height:100vh;
@@ -32,3 +21,15 @@ font-weight: 900;
 padding: 10px;
 text-align: center;
 `;
+
+export const NotFound = () => {
+    return (
+        <NotFoundBox>
+            <ErrorMessage>
+                <img src={Searching} alt="Still searching for your series" ></img>
+            </ErrorMessage>
+        </NotFoundBox>
+    )
+}
+
+

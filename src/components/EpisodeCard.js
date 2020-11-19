@@ -3,25 +3,6 @@ import styled from "styled-components/macro"
 import { Link } from 'react-router-dom'
 import StandInImg from "../images/standInImg.jpg"
 
-
-export const EpisodeCard = ({ episode, xImage, season, name, image, id, number }) => {
-
-  return (
-    <CardLink to={`/episode-details/${id}`}>
-      <CardSection>
-        <CardWrapper>
-          {/*   <img src={StandInImg} ></img> */}
-          {image ? <img src={image.medium} ></img> : <img src={StandInImg} ></img>}
-          <div>
-            <h1>{name}</h1>
-            <h2>Season:<span> {season}</span> Episode:<span> {number}</span></h2>
-          </div>
-        </CardWrapper>
-      </CardSection>
-    </CardLink>
-  )
-}
-
 const CardLink = styled(Link)`
 width: 95%;
 cursor: pointer;
@@ -35,7 +16,6 @@ cursor: pointer;
   width:24%;
   }
 `;
-
 const CardSection = styled.section`
 position: relative;
 `;
@@ -53,8 +33,8 @@ opacity: 0.9;
 color: #ffff; 
 background-size:auto;
   }
-  img{
-    width: auto;
+img{
+  width: auto;
   height: 300px;
   width: -webkit-fill-available;
   object-fit: cover;
@@ -65,14 +45,13 @@ background-size:auto;
   margin: 5px;
   }
 div{
-    position: absolute;
+  position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   color: #ffffff;
   text-align: center;
-
   -webkit-transition: opacity 0.7s ease-in-out;
   -moz-transition:opacity 0.7s ease-in-out;
   -o-transition: opacity 0.7 ease-in-out;
@@ -100,5 +79,22 @@ div{
   }
 }
 `;
+export const EpisodeCard = ({ episode, xImage, season, name, image, id, number }) => {
+  return (
+    <CardLink to={`/episode-details/${id}`}>
+      <CardSection>
+        <CardWrapper>
+          {image ? <img src={image.medium} alt={name} ></img> : <img src={StandInImg} alt="MoveE Image" ></img>}
+          <div>
+            <h1>{name}</h1>
+            <h2>Season:<span> {season}</span> Episode:<span> {number}</span></h2>
+          </div>
+        </CardWrapper>
+      </CardSection>
+    </CardLink>
+  )
+}
+
+
 
 

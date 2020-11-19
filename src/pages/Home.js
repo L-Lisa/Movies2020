@@ -15,13 +15,11 @@ export const Home = () => {
     const [showBackground, setShowBackground] = useState(true)
 
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
+    const handleSubmit = () => {
         setShowBackground(false)
         setSearchRes("")
-
         const MainURL = `https://api.tvmaze.com/singlesearch/shows/?q=${BaseQuery}&embed=episodes`
-        /* const backupURL = `http://api.tvmaze.com/search/shows?q=house` */
+
 
         fetch(MainURL)
             .then((res) => {
@@ -48,9 +46,12 @@ export const Home = () => {
         <>
             <TopSection>
                 <Head>
-                    <img src={Logo} ></img>
+                    <img src={Logo} alt="MoveE Logo" ></img>
                 </Head>
-                <form onSubmit={handleSubmit}>
+                <Recomend>
+                    <button className="reco" onClick={(e) => handleSubmit(setBaseQuery("friends"))}> Recomendation of the week</button>
+                </Recomend>
+                <form onSubmit={(e) => handleSubmit(e.preventDefault())}>
                     <label htmlFor="search bar"> <Hide className="hidden">Search Bar</Hide></label>
                     <input type="text" id="searchbar" name="search bar" required placeholder="Name your series" value={BaseQuery} onChange={(e) => setBaseQuery(e.target.value)} />
                     <button type="submit">SUBMIT</button>
@@ -69,6 +70,18 @@ export const Home = () => {
         </>
     )
 }
+const Recomend = styled.div`
+padding:10px;
+background-color: #0c2446;
+background-image: linear-gradient(160deg, #091743 0%, #80D0C7 100%);
+font-size: 1.5em;
+display: flex;
+    align-items: center;
+  color: #228DFF;
+  &:hover button{
+    background-image: linear-gradient(160deg, #80D0C7  0%,  #091743 100%);
+  }
+`;
 
 const Head = styled.section`
 margin:1em;
