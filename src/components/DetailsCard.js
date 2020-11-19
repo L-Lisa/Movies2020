@@ -1,17 +1,15 @@
 import React from 'react'
 import styled from "styled-components/macro"
-import { Link } from 'react-router-dom'
 import StandInImg from "../images/standInImg.jpg"
 import BackImg from "../images/TvBackground.jpg"
 
 
 
-export const DetailsCard = ({ details, url, image, _embedded, name, airdate, premiered, summary }) => {
-  console.log(_embedded.show.summary)
+export const DetailsCard = ({ image, _embedded, name, airdate, premiered, summary }) => {
   return (
     <DetailsWrapper>
       <DetailsDiv>
-        {image ? <img src={image.medium} alt={name}></img> : <img src={StandInImg} alt="Image"></img>}
+        {image ? <img src={image.medium} alt={name}></img> : <img src={StandInImg} alt="MoveE"></img>}
         <div>
           {name && <H1>{name} </H1>}
           {airdate && <p> First Aired: {airdate}</p>}

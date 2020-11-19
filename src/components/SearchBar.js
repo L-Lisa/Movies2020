@@ -15,11 +15,9 @@ export const SearchBar = () => {
         fetch(SearchURL)
             .then(res => res.json())
             .then(json => setSearchRes(json))
-        console.log(searchRes)
         if (!searchRes) {
             return <>Paitence, still loading.. </>
         }
-        console.log(searchRes)
     }
     return (
         <SearchWrapper>

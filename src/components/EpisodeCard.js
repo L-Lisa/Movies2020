@@ -84,7 +84,7 @@ export const EpisodeCard = ({ episode, xImage, season, name, image, id, number }
     <CardLink to={`/episode-details/${id}`}>
       <CardSection>
         <CardWrapper>
-          {image ? <img src={image.medium} alt={name} ></img> : <img src={StandInImg} alt="MoveE Image" ></img>}
+          {image ? <img src={image.medium} alt={name} ></img> : <img src={StandInImg} alt="MoveE" ></img>}
           <div>
             <h1>{name}</h1>
             <h2>Season:<span> {season}</span> Episode:<span> {number}</span></h2>
